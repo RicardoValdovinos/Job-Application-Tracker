@@ -128,7 +128,7 @@ namespace Job_Application_Tracker
 
         private void editButton_Click(object sender, EventArgs e)
         {
-            if (jobListView.SelectedItems.Count >= 1)
+            if (jobListView.SelectedItems.Count == 1)
             {
                 string companyName = jobListView.SelectedItems[0].SubItems[0].Text;
                 string title = jobListView.SelectedItems[0].SubItems[1].Text;
@@ -144,7 +144,6 @@ namespace Job_Application_Tracker
                     jobListView.SelectedItems[0].SubItems[1].Text = editForm.job.Title;
                     jobListView.SelectedItems[0].SubItems[2].Text = editForm.job.Date.ToString();
                     jobListView.SelectedItems[0].SubItems[3].Text = editForm.job.Status.ToString();
-                    jobListView.Refresh();
                 }
             }
         }

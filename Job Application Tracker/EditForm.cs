@@ -39,8 +39,30 @@ namespace Job_Application_Tracker
             command.ExecuteNonQuery();
 
             dbConnection.Close();
+            job.CompanyName = companyNameTextBox.Text;
+            job.Title = jobTitleTextBox.Text;
+            job.Date = jobDateTimePicker.Value;
+            job.Status = GetStatusFromCheckBoxes();
             DialogResult = DialogResult.OK;
             Hide();
+        }
+
+        private Status GetStatusFromCheckBoxes()
+        {
+            Status status = Status.Applied;
+
+            var checkboxList = new List<CheckBox>() { appliedCheckBox, interviewingCheckBox, offeredCheckBox, rejectedCheckBox, acceptedCheckBox };
+
+            foreach (var checkbox in checkboxList)
+            {
+                if (checkbox.Checked)
+                {
+                    status = Job.GetStatusFromString(checkbox.Text);
+                    break;
+                }
+            }
+
+            return status;
         }
 
         private void InitializeDBFile()

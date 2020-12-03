@@ -19,6 +19,32 @@ namespace Job_Application_Tracker
             Date = date;
             Status = status;
         }
+
+        public static Status GetStatusFromString(string StatusString)
+        {
+            Status status = Status.Applied;
+            if (StatusString.Contains("Applied"))
+            {
+                status = Status.Applied;
+            }
+            else if (StatusString.Contains("Interviewing"))
+            {
+                status = Status.Interviewing;
+            }
+            else if (StatusString.Contains("Offered"))
+            {
+                status = Status.Offered;
+            }
+            else if (StatusString.Contains("Rejected"))
+            {
+                status = Status.Rejected;
+            }
+            else
+            {
+                status = Status.Accepted;
+            }
+            return status;
+        }
     }
 
     public enum Status

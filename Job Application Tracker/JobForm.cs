@@ -39,26 +39,7 @@ namespace Job_Application_Tracker
             {
                 if (checkbox.Checked)
                 {
-                    if (checkbox.Text.Contains("Applied"))
-                    {
-                        status = Status.Applied;
-                    }
-                    else if (checkbox.Text.Contains("Interviewing"))
-                    {
-                        status = Status.Interviewing;
-                    }
-                    else if (checkbox.Text.Contains("Offered"))
-                    {
-                        status = Status.Offered;
-                    }
-                    else if (checkbox.Text.Contains("Rejected"))
-                    {
-                        status = Status.Rejected;
-                    }
-                    else
-                    {
-                        status = Status.Accepted;
-                    }
+                    status = Job.GetStatusFromString(checkbox.Text);
                     break;
                 }
             }

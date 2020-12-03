@@ -78,6 +78,8 @@ namespace Job_Application_Tracker
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.jobListView);
+            this.MaximumSize = new System.Drawing.Size(850, 450);
+            this.MinimumSize = new System.Drawing.Size(850, 450);
             this.Name = "JobApplicationTrackerForm";
             this.Text = "Form1";
             this.ResumeLayout(false);

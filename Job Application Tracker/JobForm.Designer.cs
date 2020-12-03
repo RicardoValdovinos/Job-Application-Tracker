@@ -174,6 +174,8 @@ namespace Job_Application_Tracker
             this.Controls.Add(this.label2);
             this.Controls.Add(this.jobTitleTextBox);
             this.Controls.Add(this.label1);
+            this.MaximumSize = new System.Drawing.Size(816, 489);
+            this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "JobForm";
             this.Text = "Form2";
             this.ResumeLayout(false);

@@ -30,8 +30,9 @@ namespace Job_Application_Tracker
         private void InitializeComponent()
         {
             this.jobListView = new System.Windows.Forms.ListView();
-            this.button1 = new System.Windows.Forms.Button();
+            this.addButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.editButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // jobListView
@@ -45,21 +46,22 @@ namespace Job_Application_Tracker
             this.jobListView.Size = new System.Drawing.Size(750, 300);
             this.jobListView.TabIndex = 0;
             this.jobListView.UseCompatibleStateImageBehavior = false;
+            this.jobListView.SelectedIndexChanged += new System.EventHandler(this.jobListView_SelectedIndexChanged);
             // 
-            // button1
+            // addButton
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.addButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(715, 50);
-            this.button1.MaximumSize = new System.Drawing.Size(75, 23);
-            this.button1.MinimumSize = new System.Drawing.Size(75, 23);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Add Job";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.submitButton_Click);
+            this.addButton.Location = new System.Drawing.Point(715, 50);
+            this.addButton.MaximumSize = new System.Drawing.Size(75, 23);
+            this.addButton.MinimumSize = new System.Drawing.Size(75, 23);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(75, 23);
+            this.addButton.TabIndex = 1;
+            this.addButton.Text = "Add Job";
+            this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.SubmitButton_Click);
             // 
             // label1
             // 
@@ -70,13 +72,24 @@ namespace Job_Application_Tracker
             this.label1.TabIndex = 2;
             this.label1.Text = "Jobs";
             // 
+            // editButton
+            // 
+            this.editButton.Location = new System.Drawing.Point(40, 49);
+            this.editButton.Name = "editButton";
+            this.editButton.Size = new System.Drawing.Size(75, 23);
+            this.editButton.TabIndex = 3;
+            this.editButton.Text = "Edit Job";
+            this.editButton.UseVisualStyleBackColor = true;
+            this.editButton.Click += new System.EventHandler(this.editButton_Click);
+            // 
             // JobApplicationTrackerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 411);
+            this.Controls.Add(this.editButton);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.addButton);
             this.Controls.Add(this.jobListView);
             this.MaximumSize = new System.Drawing.Size(850, 450);
             this.MinimumSize = new System.Drawing.Size(850, 450);
@@ -90,8 +103,9 @@ namespace Job_Application_Tracker
         #endregion
 
         private System.Windows.Forms.ListView jobListView;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button editButton;
     }
 }
 

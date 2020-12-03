@@ -4,15 +4,17 @@ using System.Text;
 
 namespace Job_Application_Tracker
 {
-    class Job
+    public class Job
     {
         public string Title { get; set; }
         public string CompanyName { get; set; }
         public DateTime Date { get; set; }
         public Status Status { get; set; }
 
+        public Int64 Id { get; set; }
 
-        public Job(string title, string companyName, DateTime date, Status status)
+
+        public Job(string companyName, string title, DateTime date, Status status)
         {
             Title = title;
             CompanyName = companyName;

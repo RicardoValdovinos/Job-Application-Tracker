@@ -11,4 +11,19 @@
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.113.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="JobForm - Copy - Copy.Designer.cs">
+      <DependentUpon>JobForm - Copy.Designer.cs</DependentUpon>
+    </Compile>
+    <Compile Update="JobForm - Copy.Designer.cs">
+      <DependentUpon>JobForm.Designer.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="JobForm - Copy.resx">
+      <DependentUpon>JobForm.resx</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

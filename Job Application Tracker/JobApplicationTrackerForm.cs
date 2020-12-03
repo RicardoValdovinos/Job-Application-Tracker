@@ -42,7 +42,7 @@ namespace Job_Application_Tracker
                 var dbConnection = new SQLiteConnection("Data Source=" + dbfile + ";Version=3;");
                 dbConnection.Open();
 
-                string createTable = "CREATE TABLE jobs (company_name TEXT, title TEXT, date TEXT, status TEXT)";
+                string createTable = "CREATE TABLE jobs (id INTEGER PRIMARY KEY, company_name TEXT, title TEXT, date TEXT, status TEXT)";
                 SQLiteCommand command = new SQLiteCommand(createTable, dbConnection);
                 command.ExecuteNonQuery();
 
@@ -62,7 +62,7 @@ namespace Job_Application_Tracker
             jobListView.Columns.Add("Status", 187, HorizontalAlignment.Left);
         }
 
-        private void submitButton_Click(object sender, EventArgs e)
+        private void SubmitButton_Click(object sender, EventArgs e)
         {
             JobForm jobForm = new JobForm();
             if (jobForm.ShowDialog() == DialogResult.OK)
@@ -76,12 +76,18 @@ namespace Job_Application_Tracker
             }
         }
 
+        private void jobListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void AddJobToListView(Job job)
         {
             var listViewItem = new ListViewItem(job.CompanyName);
             listViewItem.SubItems.Add(job.Title);
             listViewItem.SubItems.Add(job.Date.ToString());
             listViewItem.SubItems.Add(job.Status.ToString());
+            listViewItem.SubItems.Add(job.Id.ToString());
             jobListView.Items.Add(listViewItem);
         }
 
@@ -92,7 +98,7 @@ namespace Job_Application_Tracker
             var dbConnection = new SQLiteConnection("Data Source=" + dbfile + ";Version=3;");
             dbConnection.Open();
 
-            var insert = $"INSERT INTO jobs (company_name, title, date, status) VALUES ({job.CompanyName}, {job.Title}, {job.Date}, {job.Status.ToString()});";
+            var insert = $"INSERT INTO jobs (company_name, title, date, status) VALUES ('{job.CompanyName}', '{job.Title}', '{job.Date}', '{job.Status}')";
             SQLiteCommand command = new SQLiteCommand(insert, dbConnection);
             command.ExecuteNonQuery();
 
@@ -108,19 +114,39 @@ namespace Job_Application_Tracker
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                string title = (string)reader["title"];
+                Int64 rowId = Convert.ToInt64(reader["id"]);
                 string companyName = (string)reader["company_name"];
+                string title = (string)reader["title"];
                 DateTime date = Convert.ToDateTime((string)reader["date"]);
                 Status status = Job.GetStatusFromString((string)reader["status"]);
-                var job = new Job(title, companyName, date, status);
+                var job = new Job(companyName, title, date, status);
+                job.Id = rowId;
                 AddJobToListView(job);
             }
             dbConnection.Close();
         }
 
-        private void jobListView_SelectedIndexChanged(object sender, EventArgs e)
+        private void editButton_Click(object sender, EventArgs e)
         {
-
+            if (jobListView.SelectedItems.Count >= 1)
+            {
+                string companyName = jobListView.SelectedItems[0].SubItems[0].Text;
+                string title = jobListView.SelectedItems[0].SubItems[1].Text;
+                DateTime date = Convert.ToDateTime(jobListView.SelectedItems[0].SubItems[2].Text);
+                Status status = Job.GetStatusFromString(jobListView.SelectedItems[0].SubItems[3].Text);
+                Int64 rowid = Convert.ToInt64(jobListView.SelectedItems[0].SubItems[4].Text);
+                Job job = new Job(companyName, title, date, status);
+                job.Id = rowid;
+                EditForm editForm = new EditForm(job);
+                if (editForm.ShowDialog() == DialogResult.OK)
+                {
+                    jobListView.SelectedItems[0].SubItems[0].Text = editForm.job.CompanyName;
+                    jobListView.SelectedItems[0].SubItems[1].Text = editForm.job.Title;
+                    jobListView.SelectedItems[0].SubItems[2].Text = editForm.job.Date.ToString();
+                    jobListView.SelectedItems[0].SubItems[3].Text = editForm.job.Status.ToString();
+                    jobListView.Refresh();
+                }
+            }
         }
     }
 }

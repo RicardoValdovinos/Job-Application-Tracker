@@ -24,12 +24,13 @@ namespace Job_Application_Tracker
         {
             JobTitle = jobTitleTextBox.Text;
             CompanyName = companyNameTextBox.Text;
-            Status = GetStatusFromRadioButtons();
+            if (JobDate == DateTime.MinValue) JobDate = DateTime.Now;
+            Status = GetStatusFromCheckBoxes();
             DialogResult = DialogResult.OK;
             Hide();
         }
 
-        private Status GetStatusFromRadioButtons()
+        private Status GetStatusFromCheckBoxes()
         {
             Status status = Status.Applied;
 

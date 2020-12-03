@@ -103,5 +103,20 @@ namespace Job_Application_Tracker
             }
         }
 
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            var condition = $"id = '{job.Id}'";
+            var sql = $"DELETE FROM jobs WHERE {condition}";
+            var dbConnection = new SQLiteConnection("Data Source=" + dbfile + ";Version=3;");
+            dbConnection.Open();
+
+            SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+            command.ExecuteNonQuery();
+
+            dbConnection.Close();
+            job = null;
+            DialogResult = DialogResult.OK;
+            Hide();
+        }
     }
 }

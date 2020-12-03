@@ -41,6 +41,7 @@ namespace Job_Application_Tracker
             this.label2 = new System.Windows.Forms.Label();
             this.jobTitleTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.deleteButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label3
@@ -151,11 +152,22 @@ namespace Job_Application_Tracker
             this.label1.TabIndex = 17;
             this.label1.Text = "Job Title";
             // 
+            // deleteButton
+            // 
+            this.deleteButton.Location = new System.Drawing.Point(98, 395);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(75, 23);
+            this.deleteButton.TabIndex = 29;
+            this.deleteButton.Text = "Delete";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            // 
             // EditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.jobDateTimePicker);
             this.Controls.Add(this.acceptedCheckBox);
@@ -189,5 +201,6 @@ namespace Job_Application_Tracker
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox jobTitleTextBox;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button deleteButton;
     }
 }

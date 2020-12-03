@@ -140,10 +140,18 @@ namespace Job_Application_Tracker
                 EditForm editForm = new EditForm(job);
                 if (editForm.ShowDialog() == DialogResult.OK)
                 {
-                    jobListView.SelectedItems[0].SubItems[0].Text = editForm.job.CompanyName;
-                    jobListView.SelectedItems[0].SubItems[1].Text = editForm.job.Title;
-                    jobListView.SelectedItems[0].SubItems[2].Text = editForm.job.Date.ToString();
-                    jobListView.SelectedItems[0].SubItems[3].Text = editForm.job.Status.ToString();
+                    if (editForm.job == null)
+                    {
+                        jobListView.SelectedItems[0].Remove();
+                        jobListView.Refresh();
+                    }
+                    else
+                    {
+                        jobListView.SelectedItems[0].SubItems[0].Text = editForm.job.CompanyName;
+                        jobListView.SelectedItems[0].SubItems[1].Text = editForm.job.Title;
+                        jobListView.SelectedItems[0].SubItems[2].Text = editForm.job.Date.ToString();
+                        jobListView.SelectedItems[0].SubItems[3].Text = editForm.job.Status.ToString();
+                    }
                 }
             }
         }
